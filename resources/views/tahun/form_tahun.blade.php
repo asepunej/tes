@@ -4,19 +4,20 @@
 
 <div class="card card-info">
     <div class="card-header">
-        <h2>{{ $datarecord->tahun ? 'Edit Post' : 'Tambah Post' }}</h2>
+        <h3 class="card-title">{{ $datarecord->tahun ? 'Edit Post' : 'Tambah Tahun' }} </h3>
     </div>
 
-
-
-    <form action="/tahun/store" method="POST">
+    <form action="{{ $datarecord->tahun ? route('tahun.update', $datarecord->tahun) : route('tahun.store') }}" method="POST">
         @csrf
+        @if($datarecord->tahun)
+        @method('PUT')
+        @endif
         <div class="card-body">
             <div class="form-group">
-                <label for="nama" class="form-label">Tahun</label>
 
-                <input type="number" class="form-control @error('tahun') is-invalid @enderror" name="tahun" value="{{ old('tahun',$datarecord->tahun) }}">
-                @error('nama_perusahaan') <div class="invalid-feedback">{{ $message }}</div>@enderror
+                <label for="title" class="form-label">Tahun</label>
+                <input type="text" class="form-control" id="tahun" name="tahun" value="{{ old('tahun', $datarecord->tahun) }}">
+
 
 
             </div>

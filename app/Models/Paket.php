@@ -9,8 +9,24 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Paket extends Model
 {
     use HasFactory;
-    protected $fillable=[
-        'nama','uraian','lokasi', 'tahun_id','perusahaan_id','mitra_id','proses_id'
+    protected $table = 'master.paket';
+    public $timestamps = false;
+    protected $fillable = [
+        'uraian',
+        'tahun',
+        'lokasi',
+        'id_perusahaan',
+        'mitra',
+        'mitra_id',
+        'lokasi',
+        'no_kontrak',
+        'tgl_kontrak',
+        'tgl_awal',
+        'tgl_akhir',
+        'nilai_kontrak',
+        'kd_proses',
+        'tgl'
+
     ];
 
     public function tahun(): BelongsTo

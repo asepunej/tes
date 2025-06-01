@@ -4,11 +4,14 @@
 
 <div class="card card-info">
   <div class="card-header">
-    <h3 class="card-title">Tambah Perusahaan</h3>
+    <h3 class="card-title">{{ $datarecord->id ? 'Edit Perusahaan' : 'Tambah Perusahaan' }} </h3>
   </div>
 
-  <form action="/perusahaan/store" method="POST">
+  <form action="{{ $datarecord->id ? route('perusahaan.update', $datarecord->id) : route('perusahaan.store') }}" method="POST">
     @csrf
+    @if($datarecord->id)
+    @method('PUT')
+    @endif
 
     <div class="card-body">
       <div class="form-group">
@@ -16,25 +19,25 @@
           <tr>
             <td width="20%">Nama Perusahaan </td>
             <td width="5%">:</td>
-            <td width="75%"><input type="text" class="form-control @error('nama_perusahaan') is-invalid @enderror" name="nama_perusahaan" value="{{ old('nama_perusahaan') }}" />
+            <td width="75%"><input type="text" class="form-control @error('nama_perusahaan') is-invalid @enderror" name="nama_perusahaan" value="{{ old('nama_perusahaan',$datarecord->nama_perusahaan) }}">
               @error('nama_perusahaan') <div class="invalid-feedback">{{ $message }}</div>@enderror</td>
           </tr>
           <tr>
             <td width="20%">NPWP</td>
             <td width="5%">:</td>
-            <td width="75%"><input type="text" class="form-control @error('npwp') is-invalid @enderror" name="npwp" value="{{ old('npwp') }}">
+            <td width="75%"><input type="text" class="form-control @error('npwp') is-invalid @enderror" name="npwp" value="{{ old('npwp',$datarecord->npwp) }}">
               @error('npwp') <div class="invalid-feedback">{{ $message }}</div>@enderror </td>
           </tr>
           <tr>
             <td width="20%">Alamat</td>
             <td width="5%">:</td>
-            <td width="75%"> <input type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" value="{{ old('alamat') }}">
+            <td width="75%"> <input type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" value="{{ old('alamat',$datarecord->alamat) }}">
               @error('alamat') <div class="invalid-feedback">{{ $message }}</div>@enderror</td>
           </tr>
           <tr>
             <td width="20%">notelp</td>
             <td width="5%">:</td>
-            <td width="75%"> <input type="text" class="form-control @error('notelp') is-invalid @enderror" name="notelp" value="{{ old('notelp') }}">
+            <td width="75%"> <input type="text" class="form-control @error('notelp') is-invalid @enderror" name="notelp" value="{{ old('notelp',$datarecord->notelp) }}">
               @error('notelp') <div class="invalid-feedback">{{ $message }}</div>@enderror
 
             </td>
@@ -42,21 +45,21 @@
           <tr>
             <td width="20%">Email</td>
             <td width="5%">:</td>
-            <td width="75%"> <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
+            <td width="75%"> <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email',$datarecord->email) }}">
               @error('notelp') <div class="invalid-feedback">{{ $message }}</div>@enderror
             </td>
           </tr>
           <tr>
             <td width="20%">Nama Bank</td>
             <td width="5%">:</td>
-            <td width="75%"> <input type="text" class="form-control @error('nama_bank') is-invalid @enderror" name="nama_bank" value="{{ old('nama_bank') }}">
+            <td width="75%"> <input type="text" class="form-control @error('nama_bank') is-invalid @enderror" name="nama_bank" value="{{ old('nama_bank', $datarecord->nama_bank) }}">
               @error('nama_bank') <div class="invalid-feedback">{{ $message }}</div>@enderror
             </td>
           </tr>
           <tr>
             <td width="20%">No Rekening</td>
             <td width="5%">:</td>
-            <td width="75%"> <input type="text" class="form-control @error('no_rek') is-invalid @enderror" name="no_rek" value="{{ old('no_rek') }}">
+            <td width="75%"> <input type="text" class="form-control @error('no_rek') is-invalid @enderror" name="no_rek" value="{{ old('no_rek',$datarecord->no_rek) }}">
               @error('no_rek') <div class="invalid-feedback">{{ $message }}</div>@enderror
 
             </td>
@@ -64,7 +67,7 @@
           <tr>
             <td width="20%">Nama Direktur</td>
             <td width="5%">:</td>
-            <td width="75%"> <input type="text" class="form-control @error('direktur') is-invalid @enderror" name="direktur" value="{{ old('direktur') }}">
+            <td width="75%"> <input type="text" class="form-control @error('direktur') is-invalid @enderror" name="direktur" value="{{ old('direktur',$datarecord->direktur) }}">
               @error('direktur') <div class="invalid-feedback">{{ $message }}</div>@enderror
             </td>
           </tr>

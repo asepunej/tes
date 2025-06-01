@@ -9,9 +9,7 @@
                     <h3 class="card-title">Data Tahun</h3>
                     </td>
                 <th align='right' width=10%>
-                    <a href="/tahun/create" class="btn btn-sm btn-info">
-                        Tambah
-                    </a>
+                    <a href="/tahun/create" class="btn btn-success mb-3">Tambah</a>
                     </td>
             </tr>
         </table>
@@ -41,11 +39,11 @@
                             <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
                                 <span class="sr-only">Toggle Dropdown</span></button>
                             <div class="dropdown-menu" role="menu">
-                                <a class="dropdown-item" href="/tahun/edit/{{$value->id}}">
+                                <a class="dropdown-item" href="{{ route('tahun.edit', $value->tahun) }}">
                                     Edit
                                 </a>
 
-                                <form action="/perusahaan/delete{{$value->id}}" method="post" onclick="return confirm ('Yakin Akan dihapus') ">
+                                <form action="/tahun/delete/{{$value->tahun}}" method="post" onclick="return confirm ('Yakin Akan dihapus') ">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="dropdown-item">Delete</button>

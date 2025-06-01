@@ -1,3 +1,5 @@
+use Illuminate\Support\Facades\Auth;
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="../index3.html" class="brand-link">
@@ -13,7 +15,7 @@
         <img src="{{asset('templates/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">Alexander Pierce</a>
+        <a href="#" class="d-block"> {{ Auth::user()->name; }}</a>
       </div>
     </div>
 
@@ -36,7 +38,7 @@
 
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="/paket" class="nav-link">
             <i class="nav-icon far fa-envelope"></i>
             <p> Paket Aktif</p>
           </a>

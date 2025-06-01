@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -33,10 +34,11 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             return redirect()->intended('/dashboard');
-        } else {
-            dd('Pwd salah');
         }
 
+        session::flash('status', 'Failed');
+        session::flash('message', 'Password Salah');
+        return redirect('/login');
         // return redirect()->back()->with('error', 'Nama atau password salah')->withInput($request->only('name'));
 
         // return back()->withErrors([

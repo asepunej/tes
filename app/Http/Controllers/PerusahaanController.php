@@ -18,7 +18,8 @@ class PerusahaanController extends Controller
 
     public function create()
     {
-        return view('perusahaan.insert_perusahaan');
+        $datarecord = new Perusahaan();
+        return view('perusahaan.insert_perusahaan', array('datarecord'  => $datarecord));
     }
 
     public function store(Request $request)
@@ -51,10 +52,9 @@ class PerusahaanController extends Controller
 
     public function edit($id)
     {
-
         $datarecord = Perusahaan::findOrFail($id);
         return view(
-            'perusahaan.edit_perusahaan',
+            'perusahaan.insert_perusahaan',
             array(
                 'datarecord'  => $datarecord,
             )
@@ -88,7 +88,7 @@ class PerusahaanController extends Controller
         return redirect('/perusahaan');
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         $datarecord = Perusahaan::where('id', $id);
         $datarecord->delete();

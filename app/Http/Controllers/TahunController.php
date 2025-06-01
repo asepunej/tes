@@ -8,36 +8,59 @@ use Illuminate\Support\Facades\DB;
 
 class TahunController extends Controller
 {
-  
+
+
     public function index()
     {
-      
-        $tahun = DB::select(' SELECT 
-        tahun
-    FROM 
-        referensi.tahun order by tahun');
-
-        return view('tahun.daftar_tahun', array( 'tahun'  =>$tahun));
+        $tahun = Tahun::all();
+        return view('tahun.daftar_tahun', compact('tahun'));
     }
 
     public function create()
     {
-        return view('tahun.insert_tahun');
+        $datarecord = new Tahun();
+        return view('tahun.form_tahun', compact('datarecord'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $id = null)
     {
-        $this->validate($request,[
-            'tahun'=>'required|max:2050',
-          
+        $request->validate([
+            'tahun' => 'required'
         ]);
-
         Tahun::create([
-            'tahun'=>$request->tahun,
+            'tahun' => $request->tahun
+        ]);
+        return redirect('/tahun');
+    }
+
+    public function edit($tahun)
+    {
+        $datarecord = Tahun::where('tahun', $tahun)->first();
+        return view(
+            'Tahun.form_tahun',
+            array(
+                'datarecord'  => $datarecord,
+            )
+        );
+    }
+
+    public function update(Request $request, $tahun)
+    {
+        $request->validate([
+            'tahun' => 'required'
         ]);
 
-        return redirect('/tahun');
-        
 
+        Tahun::where('tahun', $tahun)->update([
+            'tahun' => $request->tahun
+        ]);
+        return redirect('/tahun');
+    }
+
+    public function destroy($tahun)
+    {
+        $datarecord = Tahun::where('tahun', $tahun);
+        $datarecord->delete();
+        return redirect('/tahun');
     }
 }
